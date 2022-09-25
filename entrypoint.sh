@@ -3,7 +3,6 @@ set -e
 
 USERNAME=${USERNAME:-user}
 PASSWORD=${PASSWORD:-pass}
-ALLOW=${ALLOW:-192.168.8.0/24 192.168.24.0/24 172.16.0.0/12 127.0.0.1/32}
 VOLUME=${VOLUME:-/data}
 
 
@@ -32,8 +31,6 @@ port = 873
 [volume]
 	uid = root
 	gid = root
-	hosts deny = *
-	hosts allow = ${ALLOW}
 	read only = false
 	path = ${VOLUME}
 	comment = ${VOLUME} directory
