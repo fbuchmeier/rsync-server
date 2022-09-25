@@ -25,7 +25,7 @@ setup_rsyncd(){
 pid file = /var/run/rsyncd.pid
 log file = /dev/stdout
 timeout = 300
-max connections = 10
+max connections = 1
 port = 873
 
 [volume]
