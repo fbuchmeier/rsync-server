@@ -10,7 +10,7 @@ setup_rsyncd(){
 	echo "$USERNAME:$PASSWORD" > /opt/rsyncd/rsyncd.secrets
     chmod 0400 /opt/rsyncd/rsyncd.secrets
 	[ -f /opt/rsyncd/rsyncd.conf ] || cat > /opt/rsyncd/rsyncd.conf <<EOF
-pid file = /var/run/rsyncd.pid
+pid file = /opt/rsyncd/rsyncd.pid
 log file = /dev/stdout
 timeout = 300
 max connections = 1

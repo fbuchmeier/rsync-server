@@ -11,14 +11,16 @@ RUN apt-get update && \
 
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod 744 /entrypoint.sh
-
 RUN groupadd -r rsync -g 433 && \
-	useradd -u 431 -r -g rsync -s /sbin/nologin -c "Docker image user" rsync
+  useradd -u 431 -r -g rsync -s /sbin/nologin -c "Docker image user" rsync
 
-RUN mkdir /opt/rsyncd && \
-	chown rsync:rsync /opt/rsyncd
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod 744 /entrypoint.sh && \
+      chown rsync:rsync /entrypoint.sh && \
+      mkdir /opt/rsyncd && \
+	    chown rsync:rsync /opt/rsyncd && \
+      mkdir /data && \
+      chown rsync:rsync /data
 
 EXPOSE 8873
 
