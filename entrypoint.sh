@@ -16,6 +16,7 @@ log file = /dev/stdout
 timeout = 300
 max connections = 10
 port = 8873
+use chroot = no
 
 [volume]
 	uid = rsync
