@@ -11,14 +11,15 @@ setup_rsyncd(){
     chmod 0400 /opt/rsyncd/rsyncd.secrets
 	[ -f /opt/rsyncd/rsyncd.conf ] || cat > /opt/rsyncd/rsyncd.conf <<EOF
 pid file = /opt/rsyncd/rsyncd.pid
+lock file = /opt/rsyncd/rsyncd.lock
 log file = /dev/stdout
 timeout = 300
-max connections = 1
+max connections = 10
 port = 8873
 
 [volume]
-	uid = root
-	gid = root
+	uid = rsync
+	gid = rsync
 	read only = false
 	path = ${VOLUME}
 	comment = ${VOLUME} directory
@@ -28,5 +29,10 @@ EOF
 }
 
 mkdir -p $VOLUME
-setup_rsyncd
-exec /usr/bin/rsync --no-detach --daemon --config /opt/rsyncd/rsyncd.conf "$@"
+
+if [ "$1" == "rsync_server" ] ; then
+  setup_rsyncd
+  exec /usr/bin/rsync --no-detach --daemon --config /opt/rsyncd/rsyncd.conf "$@"
+else
+  exec "$@"
+fi

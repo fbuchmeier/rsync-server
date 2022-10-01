@@ -1,9 +1,9 @@
 build:
-	docker build -t fbuchmeier/rsync-server:2.0.0 .
+	docker build -t fbuchmeier/rsync-server:${VERSION} .
 
 publish: build
-	docker push fbuchmeier/rsync-server:2.0.0
+	docker push fbuchmeier/rsync-server:${VERSION}
 
 run: build
-	docker run --rm -it fbuchmeier/rsync-server:2.0.0
+	docker run --rm -it fbuchmeier/rsync-server:${VERSION}
 
